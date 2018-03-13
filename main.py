@@ -33,3 +33,44 @@ def bar_plot(
     # plt.xticklabels=[]
 
     return plt.gcf(), ax
+
+
+def facet(data, 
+         col, 
+         hue,
+          values
+         ):
+    
+    g = sns.FacetGrid(data, 
+                     col=col,
+                     hue=hue, 
+                     col_wrap=4, 
+                     #palette=['steelblue', 'silver'], 
+                      size=2
+                      )
+    
+    g.map(
+        plt.hist, 
+        values, 
+        bins=np.arange(1, 7), 
+        normed=True,
+        fill=True,
+        alpha=0.7, 
+        align='left', 
+        stacked=True, 
+        histtype='stepfilled', 
+        )
+
+    g.set_titles("{col_name}")
+    g.add_legend()
+    
+    g.set(
+        xlim=(.5, 6), 
+        ylim=(0,1), 
+        xticks=np.arange(1, 6), 
+        #xlabels=(['']),
+        #ylabels=(['']), 
+        yticklabels=(['']),
+        xticklabels=(['1 (low)', 2, 3, 4, 5])
+        )
+    return 
